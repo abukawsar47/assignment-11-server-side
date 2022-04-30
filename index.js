@@ -34,6 +34,15 @@ async function run() {
             const car = await carCollection.findOne(query);
             res.send(car);
         })
+
+        //post
+        app.post('/car', async (req, res) => {
+            const newCar = req.body;
+            const result = await carCollection.insertOne(newCar);
+            res.send(result);
+        })
+
+
     }
     finally {
 
