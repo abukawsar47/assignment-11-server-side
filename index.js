@@ -33,6 +33,8 @@ async function run() {
             res.send(car);
         })
 
+
+
         //POST
         app.post('/car', async (req, res) => {
             const newCar = req.body;
@@ -40,16 +42,7 @@ async function run() {
             res.send(result);
         })
 
-        //PUT
-        app.put('/car/:id', async (req, res) => {
-            const id = req.params.id;
-            const updateCar = req.body;
-            const query = { _id: ObjectId(id) };
-            console.log(query);
-            const update = await carCollection.updateOne(updateCar);
-            res.send(update);
 
-        })
 
         //DELETE
         app.delete('/car/:id', async (req, res) => {
@@ -58,6 +51,23 @@ async function run() {
             const result = await carCollection.deleteOne(query);
             res.send(result);
         })
+
+        //PUT
+        app.put('/car/:id', async (req, res) => {
+            const id = req.params.id;
+            const updateCar = req.body;
+            const filter = { _id: ObjectId(id) };
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: {
+                    quantity: updateCar.quantity
+                }
+            };
+            const result = await carCollection.updateOne(filter, updateDoc, options);
+            res.send(result);
+        })
+
+
     }
     finally {
 
