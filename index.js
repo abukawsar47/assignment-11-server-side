@@ -40,6 +40,20 @@ async function run() {
             res.send(result);
         })
 
+        //PUT
+        app.put('/car/:id', async (req, res) => {
+            const id = req.params.id;
+            const updateCar = req.body;
+            const filter = { _id: ObjectId(id) };
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: {
+                    quantity: updateCar.quantity
+                }
+            };
+            const result = await carCollection.updateOne(filter, updateDoc, options);
+        })
+
         //DELETE
         app.delete('/car/:id', async (req, res) => {
             const id = req.params.id;
