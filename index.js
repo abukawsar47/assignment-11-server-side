@@ -33,8 +33,6 @@ async function run() {
             res.send(car);
         })
 
-
-
         //POST
         app.post('/car', async (req, res) => {
             const newCar = req.body;
