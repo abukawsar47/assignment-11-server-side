@@ -52,15 +52,6 @@ async function run() {
             res.send(car);
         })
 
-        // =================
-        /*      app.get('/car', async (req, res) => {
-                 const query = {};
-                 const cursor = carCollection.find(query);
-                 const supplierInfo = await cursor.toArray();
-                 res.send(supplierInfo);
-             }); */
-        // ==================
-
 
         //POST
         app.post('/car', async (req, res) => {
